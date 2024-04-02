@@ -47,28 +47,33 @@ def Check_toggle():
 root = tk.Tk()
 root.geometry("1000x600")
 root.title("Password Generator")
-root.resizable(height=None, width=None)
+# root.resizable(height=None, width=None)
 root.config(bg="gray")
 
 CharacterCount = tk.Label(root, bg="gray", text="Number Of Characters", font=('Arial', 20,'bold'), fg="black")
-CharacterCount.pack(pady=50)
+CharacterCount.pack()
 
 w = tk.Scale(root, from_=12, to=32, orient=tk.HORIZONTAL, length=600, width=30)
 w.pack()
 
 Button1 = tk.Button(root, text='Show', command=show_values)
 Button1.pack()
-
 toggle_var = tk.IntVar()
 toggle_var.trace('w', toggle_switch)  # Tracing changes to toggle_var
-toggle_button = tk.Checkbutton(root, text="Toggle 1", variable=toggle_var)
-toggle_button.pack(padx=10, pady=10)
+toggle_button = tk.Checkbutton(root,width=15, height=2, text="Include Numbers", variable=toggle_var)
+toggle_button.pack(padx=10, pady=5, side="left",anchor="nw")
 
 toggle_var2 = tk.IntVar()
 toggle_var2.trace('w', toggle_switch2)  # Tracing changes to toggle_var2
-toggle_button2 = tk.Checkbutton(root, text="Toggle 2", variable=toggle_var2)
-toggle_button2.pack(padx=10, pady=10)
+toggle_button2 = tk.Checkbutton(root,width=15, height=2, text="Include Symbols", variable=toggle_var2)
+toggle_button2.pack(padx=10, pady=5, side="right",anchor="ne")
 
 Check_toggle()  # Initial check of toggle switches
+
+Generate_Button = tk.Button(root, text="------ GENERATE  ------", font=('Arial', 20, 'bold'))
+Generate_Button.pack(pady=10)
+
+Output_Label = tk.Text(root, height=5, width=50, background="Waiting For Password to be Generated", font=('Arial', 20, 'bold'))
+Output_Label.pack(pady=10)
 
 root.mainloop()
