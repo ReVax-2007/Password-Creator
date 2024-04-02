@@ -1,10 +1,13 @@
 import tkinter as tk
+from tkinter import *
 
 # VARIABLES
 CharacterCount = " "
 Characters = " "
 On_switch = False
 On_switch2 = False
+Password = " "
+Temp_Password = "/Ud./88oR£gOWpZBje[16[3@:d]4"
 
 # LOGIC code
 def show_values():
@@ -43,6 +46,10 @@ def Check_toggle():
     else:
         print("Switch 2 is off")
 
+def gtc(dtxt):
+    root.clipboard_clear()
+    root.clipboard_append(dtxt)
+
 # UI code
 root = tk.Tk()
 root.geometry("1000x600")
@@ -70,10 +77,14 @@ toggle_button2.pack(padx=10, pady=5, side="right",anchor="ne")
 
 Check_toggle()  # Initial check of toggle switches
 
+Copy_Button = tk.Button(text='Copy Password', command=lambda: gtc(Temp_Password))
+Copy_Button.pack()
+
+
 Generate_Button = tk.Button(root, text="------ GENERATE  ------", font=('Arial', 20, 'bold'))
 Generate_Button.pack(pady=10)
 
-Output_Label = tk.Text(root, height=5, width=50, background="Waiting For Password to be Generated", font=('Arial', 20, 'bold'))
+Output_Label = tk.Label(root, height=5, width=50, text="Waiting For Password to be Generated", font=('Arial', 20, 'bold'))
 Output_Label.pack(pady=10)
 
 root.mainloop()
