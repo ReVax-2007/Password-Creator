@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+from tkinter import ttk
 
 # VARIABLES
 CharacterCount = " "
@@ -10,10 +11,11 @@ Password = " "
 Temp_Password = "/Ud./88oR£gOWpZBje[16[3@:d]4"
 
 # LOGIC code
-def show_values():
+def show_values(value):
     global Characters
-    Characters = str(w.get())
+    Characters = str(int(round(float(value))))  # Ensure only full value numbers
     print("Characters:", Characters)
+    CharacterCount.config(text="Number Of Characters: " + Characters)
 
 def toggle_switch(*args):
     global On_switch
@@ -50,21 +52,38 @@ def gtc(dtxt):
     root.clipboard_clear()
     root.clipboard_append(dtxt)
 
+# Function to update the tooltip position
+def update_tooltip_pos():
+    x, y, _, _ = w.bbox("handle")
+    val = round(w.get())
+    tooltip.place(x=x, y=y-30)
+    tooltip.configure(text=str(val))
+
+
 # UI code
 root = tk.Tk()
 root.geometry("1000x600")
 root.title("Password Generator")
-# root.resizable(height=None, width=None)
 root.config(bg="gray")
 
-CharacterCount = tk.Label(root, bg="gray", text="Number Of Characters", font=('Arial', 20,'bold'), fg="black")
+CharacterCount = tk.Label(root, bg="gray", text="Number Of Characters: 12", font=('Arial', 20,'bold'), fg="black")
 CharacterCount.pack()
 
-w = tk.Scale(root, from_=12, to=32, orient=tk.HORIZONTAL, length=600, width=30)
-w.pack()
+# Create a custom style for the scale widget
+style = ttk.Style()
+# Define a new style class for the rounded slider
+style.configure("Rounded.Horizontal.TScale", sliderthickness=20, troughcolor="light gray", background="gray",
+                troughrelief="flat", sliderrelief="flat", borderwidth=0)
 
-Button1 = tk.Button(root, text='Show', command=show_values)
-Button1.pack()
+w = ttk.Scale(root, from_=12, to=32, orient=tk.HORIZONTAL, length=500, style="Rounded.Horizontal.TScale", command=show_values)
+w.pack(pady=30)
+
+# Tooltip for the slider
+tooltip = tk.Label(root, bg="white", fg="black", borderwidth=1, relief="solid")
+tooltip.bind("<Motion>", lambda event: update_tooltip_pos())
+
+Button1 = tk.Button(root, text='Select', command=lambda: show_values(w.get()))
+Button1.pack(pady=(0,10))
 toggle_var = tk.IntVar()
 toggle_var.trace('w', toggle_switch)  # Tracing changes to toggle_var
 toggle_button = tk.Checkbutton(root,width=15, height=2, text="Include Numbers", variable=toggle_var)
@@ -79,7 +98,6 @@ Check_toggle()  # Initial check of toggle switches
 
 Copy_Button = tk.Button(text='Copy Password', command=lambda: gtc(Temp_Password))
 Copy_Button.pack()
-
 
 Generate_Button = tk.Button(root, text="------ GENERATE  ------", font=('Arial', 20, 'bold'))
 Generate_Button.pack(pady=10)
