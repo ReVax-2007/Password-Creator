@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from PasswordLogic import PasswordLogic
+from tkinter import Tk, PhotoImage
+
+
 
 # VARIABLES
 CharacterCount = " "
@@ -57,18 +60,22 @@ def on_click_pg():
     Output_Label.config(text=myPassword)
     print(f"The newly generated password is: {myPassword}")
 
+
 # UI code
+
 root = tk.Tk()
 root.geometry("1000x600")
 root.title("Password Generator")
 root.config(bg="gray")
 password_var = tk.StringVar()
 
+
+
 CharacterCount = tk.Label(root, bg="gray", text="Number Of Characters: 12", font=('Arial', 20, 'bold'), fg="black")
 CharacterCount.pack()
 
 style = ttk.Style()
-style.configure("Rounded.Horizontal.TScale", sliderthickness=20, troughcolor="light gray", background="gray", troughrelief="flat", sliderrelief="flat", borderwidth=0)
+style.configure("Rounded.Horizontal.TScale", sliderthickness=20, troughcolor="light gray", background="gray", troughrelief="flat", sliderrelief="flat")
 
 w = ttk.Scale(root, from_=12, to=52, orient=tk.HORIZONTAL, length=500, style="Rounded.Horizontal.TScale", command=show_values)
 w.pack(pady=30)
@@ -76,7 +83,7 @@ w.pack(pady=30)
 tooltip = tk.Label(root, bg="white", fg="black", borderwidth=1, relief="solid")
 tooltip.bind("<Motion>", lambda event: update_tooltip_pos())
 
-Select = tk.Button(root, text='Select', command=lambda: show_values(w.get()))
+Select = tk.Button(root, text='Select', command=lambda: show_values(w.get()), borderwidth=5, relief=RIDGE)
 Select.pack(pady=(0,10))
 toggle_var = tk.IntVar()
 toggle_var.trace('w', lambda *args: toggle_switch())  
@@ -91,10 +98,10 @@ include_symbols.pack(padx=10, pady=5, side="right", anchor="ne")
 Generate_Button = tk.Button(root, borderwidth=10, relief=RIDGE, text="------ GENERATE  ------", command=lambda : on_click_pg(), font=('Arial', 20, 'bold'))
 Generate_Button.pack(pady=10)
 
-Output_Label = tk.Label(root, height=5, width=50, text=password_var, font=('Arial', 20, 'bold'))
+Output_Label = tk.Label(root, height=5, width=50, text=password_var, borderwidth=10, relief="raised", font=('Arial', 20, 'bold'))
 Output_Label.pack(pady=(30,0))
 
-Copy_Button = tk.Button(text='Copy Password', command=gtc, borderwidth=10, relief=RIDGE)
-Copy_Button.pack(side="right", anchor="n")
+Copy_Button = tk.Button(text='Copy Password', command=gtc, borderwidth=5, relief=RIDGE)
+Copy_Button.pack(pady=10, side="right", anchor="n")
 
 root.mainloop()
