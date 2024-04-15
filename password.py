@@ -70,7 +70,6 @@ root.config(bg="gray")
 password_var = tk.StringVar()
 
 
-
 CharacterCount = tk.Label(root, bg="gray", text="Number Of Characters: 12", font=('Arial', 20, 'bold'), fg="black")
 CharacterCount.pack()
 
