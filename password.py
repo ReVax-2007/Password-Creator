@@ -73,7 +73,6 @@ bg = PhotoImage(file="Lock.png")
 label1 = Label(root, image = bg)
 label1.place(x = 0, y = 0, relwidth=1, relheight=1)
 
-
 CharacterCount = tk.Label(root, bg="gray", text="Number Of Characters: 12", font=('Arial', 20, 'bold'), fg="black")
 CharacterCount.pack()
 
