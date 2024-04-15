@@ -64,11 +64,14 @@ def on_click_pg():
 # UI code
 
 root = tk.Tk()
-root.geometry("1000x600")
+root.geometry("1080x720")
 root.title("Password Generator")
 root.config(bg="gray")
 password_var = tk.StringVar()
 
+bg = PhotoImage(file="Lock.png")
+label1 = Label(root, image = bg)
+label1.place(x = 0, y = 0, relwidth=1, relheight=1)
 
 
 CharacterCount = tk.Label(root, bg="gray", text="Number Of Characters: 12", font=('Arial', 20, 'bold'), fg="black")
