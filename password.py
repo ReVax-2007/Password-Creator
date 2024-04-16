@@ -79,7 +79,7 @@ CharacterCount.pack()
 style = ttk.Style()
 style.configure("Rounded.Horizontal.TScale", sliderthickness=20, troughcolor="light gray", background="gray", troughrelief="flat", sliderrelief="flat")
 
-w = ttk.Scale(root, from_=12, to=60, orient=tk.HORIZONTAL, length=500, style="Rounded.Horizontal.TScale", command=show_values)
+w = ttk.Scale(root, from_=12, to=42, orient=tk.HORIZONTAL, length=500, style="Rounded.Horizontal.TScale", command=show_values)
 w.pack(pady=30)
 
 tooltip = tk.Label(root, bg="white", fg="black", borderwidth=1, relief="solid")
