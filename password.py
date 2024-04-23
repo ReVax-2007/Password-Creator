@@ -14,6 +14,8 @@ On_switch2 = False
 Password = " "
 Characters = 15
 
+
+
 # LOGIC code
 def show_values(value):
     global Characters
@@ -60,6 +62,9 @@ def on_click_pg():
     Output_Label.config(text=myPassword)
     print(f"The newly generated password is: {myPassword}")
 
+def initialize_password_var():
+    global password_var
+    password_var = tk.StringVar(value="Waiting for Input ...")  # Initialize with empty string
 
 # UI code
 
@@ -67,7 +72,8 @@ root = tk.Tk()
 root.geometry("1080x720")
 root.title("Password Generator")
 root.config(bg="gray")
-password_var = tk.StringVar()
+initialize_password_var()
+# password_var = tk.StringVar()
 
 bg = PhotoImage(file="Lock.png")
 label1 = Label(root, image = bg)
@@ -100,7 +106,7 @@ include_symbols.pack(padx=10, pady=5, side="right", anchor="ne")
 Generate_Button = tk.Button(root, borderwidth=10, relief=RIDGE, text="------ GENERATE  ------", command=lambda : on_click_pg(), font=('Arial', 20, 'bold'))
 Generate_Button.pack(pady=10)
 
-Output_Label = tk.Label(root, height=5, width=50, text=password_var, borderwidth=10, relief="raised", font=('Arial', 20, 'bold'))
+Output_Label = tk.Label(root, height=5, width=50, textvariable=password_var, borderwidth=10, relief="raised", font=('Arial', 20, 'bold'))
 Output_Label.pack(pady=(30,0))
 
 Copy_Button = tk.Button(text='Copy Password', command=gtc, borderwidth=5, relief=RIDGE)
